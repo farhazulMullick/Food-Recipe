@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="mainViewModels"
+            type="com.example.foodrecipe.viewmodels.MainViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/lightGray"
+        tools:context=".ui.fragments.recipes.RecipesFragment">
+
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/swipe_to_refresh"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.todkars.shimmer.ShimmerRecyclerView
+                android:id="@+id/recycler_View"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:shimmer_recycler_item_count="3"
+                app:shimmer_recycler_layout="@layout/placeholder_row_layout"/>
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/recipes_fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="24dp"
+            android:layout_marginBottom="24dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:src="@drawable/ic_restaurant"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <ImageView
+            android:id="@+id/sad_image"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:src="@drawable/ic_dissatisfied"
+            android:visibility="invisible"
+            android:readApiResponse="@{mainViewModels.recipesResponse}"
+            android:readDatabase="@{mainViewModels.readOfflineRecipe}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            android:alpha=".5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.3" />
+
+        <TextView
+            android:id="@+id/no_connecton_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/no_internet_connection"
+            android:textSize="20sp"
+            android:alpha=".5"
+            android:readApiResponseforTxtView="@{mainViewModels.recipesResponse}"
+            android:readDatabaseforTxtView="@{mainViewModels.readOfflineRecipe}"
+            android:visibility="invisible"
+            app:layout_constraintEnd_toEndOf="@+id/sad_image"
+            app:layout_constraintHorizontal_bias="0.515"
+            app:layout_constraintStart_toStartOf="@+id/sad_image"
+            app:layout_constraintTop_toBottomOf="@+id/sad_image" />
+
+        <TextView
+            android:id="@+id/offline_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/you_r_offline_please_connect_to_internet"
+            android:textSize="16sp"
+            android:alpha="0.7"
+
+            android:visibility="invisible"
+            app:layout_constraintEnd_toEndOf="@+id/no_connecton_txt"
+            app:layout_constraintStart_toStartOf="@+id/no_connecton_txt"
+            app:layout_constraintTop_toBottomOf="@+id/no_connecton_txt" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
