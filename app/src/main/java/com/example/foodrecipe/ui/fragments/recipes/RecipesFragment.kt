@@ -101,17 +101,46 @@ class RecipesFragment : Fragment() {
         searchView.isSubmitButtonEnabled = true
 
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
-            override fun onQueryTextSubmit(query: String?): Boolean {
+            override fun onQueryTextSubmit(searchQuery: String?): Boolean {
+                if (searchQuery != null) {
+                    showShimmerEffect()
+                    searchQuery(searchQuery)
+                }
                 return true
             }
 
-            override fun onQueryTextChange(newText: String?): Boolean {
+            override fun onQueryTextChange(searchQuery: String?): Boolean {
                 return true
             }
 
         })
     }
 
+    private fun searchQuery(searchQuery: String){
+
+        Log.d("Recipe Fragment", "Search query started")
+        mainViewModel.searchRecipes(recipeViewModel.applySearchQuery(searchQuery))
+        mainViewModel.searchedRecipesResponse.observe(viewLifecycleOwner, { response ->
+            when(response){
+                is NetworkResult.Success -> {
+                    hideShimmerEffect()
+                    adapter.setData(response.data!!)
+                }
+
+                is NetworkResult.Error ->{
+                    hideShimmerEffect()
+                    loadFromCache()
+                    Toast.makeText(requireContext(), response.message.toString()
+                    , Toast.LENGTH_SHORT).show()
+                }
+
+                is NetworkResult.Loading -> {
+                    showShimmerEffect()
+                }
+            }
+
+        })
+    }
 
 
     private fun readfromDataBase() {

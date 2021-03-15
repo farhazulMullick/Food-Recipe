@@ -45,4 +45,24 @@
         <item name="android:textColor">@color/chip_text_color</item>
         <item name="checkedIconTint">@color/chip_text_color</item>
     </style>
+
+    <style name="DetailsActivityStyle" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/purple_500</item>
+        <item name="colorPrimaryVariant">@color/purple_700</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorAccent">@color/colorSecondary</item>
+        <item name="colorControlNormal">@color/white</item>
+        <item name="android:statusBarColor">@color/design_default_color_primary_variant</item>
+    </style>
+
+    <style name="CustomTabLayout" parent="Widget.Design.TabLayout">
+        <item name="tabIndicatorHeight">2dp</item>
+        <item name="tabBackground">@color/design_default_color_primary</item>
+        <item name="tabIndicatorColor">@color/white</item>
+        <item name="tabSelectedTextColor">@color/white</item>
+    </style>
+
+    <style name="CustomTextColor" parent="TextAppearance.Design.Tab">
+        <item name="android:textColor">@color/white</item>
+    </style>
 </resources>

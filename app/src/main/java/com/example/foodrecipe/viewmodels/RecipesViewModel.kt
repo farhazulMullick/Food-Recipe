@@ -14,6 +14,7 @@ import com.example.foodrecipe.util.Constants.Companion.API_KEY
 import com.example.foodrecipe.util.Constants.Companion.DEFAULT_DIET_TYPE
 import com.example.foodrecipe.util.Constants.Companion.DEFAULT_MEAL_TYPE
 import com.example.foodrecipe.util.Constants.Companion.DEFAULT_NUMBER
+import com.example.foodrecipe.util.Constants.Companion.QUERY
 import com.example.foodrecipe.util.Constants.Companion.QUERY_ADD_RECIPE_INFORMATION
 import com.example.foodrecipe.util.Constants.Companion.QUERY_API_KEY
 import com.example.foodrecipe.util.Constants.Companion.QUERY_DIET
@@ -89,6 +90,18 @@ class RecipesViewModel @Inject constructor(
         mQuery[QUERY_API_KEY] = API_KEY
         mQuery[QUERY_TYPE] = mealType
         mQuery[QUERY_DIET] = dietType
+        mQuery[QUERY_FILL_INGREDIENTS] = "true"
+        mQuery[QUERY_ADD_RECIPE_INFORMATION] = "true"
+
+        return mQuery
+    }
+
+    fun applySearchQuery(searchQuery: String): HashMap<String, String>{
+        val mQuery = HashMap<String, String>()
+
+        mQuery[QUERY] = searchQuery
+        mQuery[QUERY_NUMBERS] = DEFAULT_NUMBER
+        mQuery[QUERY_API_KEY] = API_KEY
         mQuery[QUERY_FILL_INGREDIENTS] = "true"
         mQuery[QUERY_ADD_RECIPE_INFORMATION] = "true"
 

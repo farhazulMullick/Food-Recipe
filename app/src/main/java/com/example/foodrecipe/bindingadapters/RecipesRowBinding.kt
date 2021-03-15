@@ -1,16 +1,43 @@
 package com.example.foodrecipe.bindingadapters
 
+import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.databinding.BindingAdapter
+import androidx.navigation.findNavController
 import coil.load
 import com.example.foodrecipe.R
+import com.example.foodrecipe.modals.Result
+import com.example.foodrecipe.ui.fragments.recipes.RecipesFragmentDirections
+import org.jsoup.Jsoup
 
 class RecipesRowBinding {
 
     companion object{
+
+        @BindingAdapter("android:parseHtml")
+        @JvmStatic
+        fun parseHtml(textView: TextView, description: String?){
+            val desc = Jsoup.parse(description).text()
+            textView.text = desc
+        }
+
+        @BindingAdapter("android:setOnClickListener")
+        @JvmStatic
+        fun launchDetailsScreen(view: ConstraintLayout, result: Result){
+            Log.d("RecipesRowbinding", "CALLED")
+            view.setOnClickListener {
+                try {
+                    val action = RecipesFragmentDirections.actionRecipeFragmentToDetailsActivity(result)
+                    view.findNavController().navigate(action)
+                }catch (e: Exception){
+                    Log.d("RecipesRowbinding", e.message.toString())
+                }
+            }
+        }
 
         @BindingAdapter("androidLoadImageFromUrl")
         @JvmStatic

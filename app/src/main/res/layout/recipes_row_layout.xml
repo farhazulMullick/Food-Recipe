@@ -8,9 +8,14 @@
             name="result"
             type="com.example.foodrecipe.modals.Result" />
 
+        <variable
+            name="constants"
+            type="com.example.foodrecipe.util.Constants" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:setOnClickListener="@{result}"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="6dp"
@@ -35,9 +40,12 @@
 
                 <ImageView
                     android:id="@+id/recipe_image_view"
-                    androidLoadImageFromUrl="@{result.image}"
+                    androidLoadImageFromUrl="@{constants.BASE_RECIPE_IMAGE_URL + result.id + constants.SIZE_AND_TYPE}"
                     android:layout_width="170dp"
                     android:layout_height="0dp"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginBottom="4dp"
                     android:scaleType="centerCrop"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -50,7 +58,6 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="12dp"
-                    android:layout_marginTop="12dp"
                     android:layout_marginEnd="12dp"
                     android:ellipsize="end"
                     android:fontFamily="@font/courgette"
@@ -60,7 +67,7 @@
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/recipe_image_view"
-                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/recipe_image_view"
                     tools:text="@{result.title}" />
 
                 <TextView
@@ -70,7 +77,7 @@
                     android:layout_marginTop="12dp"
                     android:ellipsize="end"
                     android:maxLines="3"
-                    android:text="@{result.summary}"
+                    android:parseHtml="@{result.summary}"
                     android:textAlignment="viewStart"
                     android:textColor="@color/darkGray"
                     app:layout_constraintEnd_toEndOf="@+id/recipe_title_txt"
@@ -106,7 +113,7 @@
                     android:layout_height="wrap_content"
                     app:layout_constraintEnd_toEndOf="@+id/clock_textView"
                     app:layout_constraintStart_toStartOf="@+id/clock_textView"
-                    app:layout_constraintTop_toTopOf="@+id/vegan_imageView"
+                    app:layout_constraintTop_toTopOf="@+id/vegetarian_check"
                     app:srcCompat="@drawable/ic_time"
                     app:tint="@color/lightYellow" />
 
@@ -123,7 +130,7 @@
                     tools:text="100" />
 
                 <ImageView
-                    android:id="@+id/vegan_imageView"
+                    android:id="@+id/vegetarian_check"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
@@ -143,7 +150,7 @@
                     android:textAlignment="center"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="@+id/recipe_desc_txt"
-                    app:layout_constraintTop_toBottomOf="@+id/vegan_imageView" />
+                    app:layout_constraintTop_toBottomOf="@+id/vegetarian_check" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </com.google.android.material.card.MaterialCardView>

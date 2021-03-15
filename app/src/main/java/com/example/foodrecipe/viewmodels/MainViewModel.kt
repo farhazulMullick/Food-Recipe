@@ -11,7 +11,6 @@ import com.example.foodrecipe.modals.FoodRecipe
 import com.example.foodrecipe.util.NetworkResult
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers.IO
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 import retrofit2.Response
 import java.lang.Exception
@@ -19,7 +18,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MainViewModel @Inject constructor(
-        val  repository: Repository,
+        private val  repository: Repository,
         application: Application
 ): AndroidViewModel(application) {
 
@@ -35,10 +34,17 @@ class MainViewModel @Inject constructor(
     /*RETROFIT*/
 
     val recipesResponse: MutableLiveData<NetworkResult<FoodRecipe>> = MutableLiveData()
+    val searchedRecipesResponse: MutableLiveData<NetworkResult<FoodRecipe>> = MutableLiveData()
 
     fun getRecipes (queries: Map<String, String>) = viewModelScope.launch {
         getRecipesSafeCall(queries)
     }
+
+    fun searchRecipes(searchQuery: Map<String, String>) = viewModelScope.launch {
+        searchRecipesSafeCall(searchQuery)
+    }
+
+
 
     private suspend fun getRecipesSafeCall(queries: Map<String, String>) {
         recipesResponse.value = NetworkResult.Loading()
@@ -62,6 +68,22 @@ class MainViewModel @Inject constructor(
             recipesResponse.value = NetworkResult.Error("No Internet Connection.")
         }
 
+    }
+
+    private suspend fun searchRecipesSafeCall(searchQuery: Map<String, String>) {
+        searchedRecipesResponse.value = NetworkResult.Loading()
+        if(hasInternetConnection()){
+            try {
+                val response = repository.remote.searchRecipe(searchQuery)
+                searchedRecipesResponse.value = handleFoodRecipesResponse(response)
+
+            }catch (e: Exception){
+                searchedRecipesResponse.value = NetworkResult.Error("Recipes not found.")
+            }
+
+        }else{
+            searchedRecipesResponse.value = NetworkResult.Error("No Internet Connection.")
+        }
     }
 
     private fun offlineCacheRecipe(foodRecipe: FoodRecipe) {
