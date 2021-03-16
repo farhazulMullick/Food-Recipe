@@ -6,7 +6,8 @@ import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import androidx.lifecycle.*
 import com.example.foodrecipe.data.Repository
-import com.example.foodrecipe.data.database.RecipeEntity
+import com.example.foodrecipe.data.database.entity.FavouritesEntity
+import com.example.foodrecipe.data.database.entity.RecipeEntity
 import com.example.foodrecipe.modals.FoodRecipe
 import com.example.foodrecipe.util.NetworkResult
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -25,11 +26,23 @@ class MainViewModel @Inject constructor(
     /*ROOM - OFFLINE CACHING*/
 
     val readOfflineRecipe: LiveData<List<RecipeEntity>> = repository.local.readRecipes().asLiveData()
+    val readFavouriteRecipes: LiveData<List<FavouritesEntity>> = repository.local.readFavouriteRecipes().asLiveData()
 
     fun insertRecipe(recipeEntity: RecipeEntity) = viewModelScope.launch(IO) {
         repository.local.insertRecipes(recipeEntity)
     }
 
+    fun insertFavouriteRecipe(favouritesEntity: FavouritesEntity) = viewModelScope.launch(IO) {
+        repository.local.insertFavouriteRecipes(favouritesEntity)
+    }
+
+    fun deleteFavouriteRecipe(favouritesEntity: FavouritesEntity) = viewModelScope.launch(IO) {
+        repository.local.deleteFavouriteRecipe(favouritesEntity)
+    }
+
+    fun deleteAllFavouriteRecipes() = viewModelScope.launch(IO) {
+        repository.local.deleteAllFavouriteRecipes()
+    }
 
     /*RETROFIT*/
 

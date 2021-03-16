@@ -1,4 +1,4 @@
-package com.example.foodrecipe.data.database
+package com.example.foodrecipe.data.database.entity
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

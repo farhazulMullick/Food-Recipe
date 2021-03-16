@@ -1,11 +1,9 @@
 package com.example.foodrecipe.data
 
-import com.example.foodrecipe.data.database.RecipeEntity
+import com.example.foodrecipe.data.database.entity.RecipeEntity
 import com.example.foodrecipe.data.database.RecipesDao
 import com.example.foodrecipe.data.database.entity.FavouritesEntity
-import dagger.hilt.android.scopes.ActivityRetainedScoped
 import kotlinx.coroutines.flow.Flow
-import org.jsoup.nodes.Entities
 import javax.inject.Inject
 
 

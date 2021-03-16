@@ -26,7 +26,6 @@ class RecipeTypeConverter {
     fun resultToString(result: Result): String{
         return gson.toJson(result)
     }
-
     @TypeConverter
     fun stringToResult(jsonData: String): Result{
         val turnsType = object : TypeToken<Result>() {}.type

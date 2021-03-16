@@ -1,12 +1,9 @@
 package com.example.foodrecipe.data.database
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
+import androidx.room.*
 import kotlinx.coroutines.flow.Flow
-import androidx.room.Query
 import com.example.foodrecipe.data.database.entity.FavouritesEntity
-import com.example.foodrecipe.modals.Result
+import com.example.foodrecipe.data.database.entity.RecipeEntity
 
 @Dao
 interface RecipesDao {
@@ -23,6 +20,7 @@ interface RecipesDao {
     @Query("SELECT * FROM favourite_recipe_table")
     fun readFavouriteRecipes(): Flow<List<FavouritesEntity>>
 
+    @Delete
     suspend fun deleteFavouriteRecipe(favouritesEntity: FavouritesEntity)
 
     @Query("DELETE FROM favourite_recipe_table ")

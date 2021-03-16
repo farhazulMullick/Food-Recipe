@@ -8,6 +8,7 @@ import com.example.foodrecipe.util.Constants.Companion.FAVOURITE_RECIPES_TABLE
 @Entity(tableName = FAVOURITE_RECIPES_TABLE)
 data class FavouritesEntity(
         @PrimaryKey(autoGenerate = true)
-        val id: Int,
-        val result: List<Result>
+        var id: Int = 0,
+
+        var result: Result
 )
