@@ -12,6 +12,7 @@ import com.example.foodrecipe.util.Constants.Companion.BASE_INGREDIENT_IMAGE_URL
 import com.example.foodrecipe.util.RecipesDiffUtil
 import kotlinx.android.synthetic.main.recipe_ingredients_layout.view.*
 
+
 class IngredientsAdapter: RecyclerView.Adapter<IngredientsAdapter.MyViewHolder>() {
 
     private var ingredients = emptyList<ExtendedIngredient>()

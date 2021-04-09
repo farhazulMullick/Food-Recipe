@@ -1,8 +1,10 @@
 package com.example.foodrecipe.data.network
 
+import com.example.foodrecipe.modals.FoodJoke
 import com.example.foodrecipe.modals.FoodRecipe
 import retrofit2.Response
 import retrofit2.http.GET
+import retrofit2.http.Query
 import retrofit2.http.QueryMap
 
 interface FoodRecipesApi {
@@ -18,4 +20,10 @@ interface FoodRecipesApi {
             @QueryMap
             query: Map<String, String>
     ): Response<FoodRecipe>
+
+    @GET("/food/jokes/random")
+    suspend fun getFoodJoke(
+        @Query("apiKey")
+        apiKey: String
+    ): Response<FoodJoke>
 }

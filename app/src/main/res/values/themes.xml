@@ -15,6 +15,14 @@
         <!-- Customize your theme here. -->
 
         <item name="bottomSheetDialogTheme">@style/CustomBottomSheetDialog</item>
+        <item name="actionModeBackground">@color/contextualActionBarColor</item>
+    </style>
+
+    // Splash - Screen
+    <style name="SplashScreen" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+        <item name="android:windowBackground">@drawable/splash_screen</item>
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowTranslucentNavigation">true</item>
     </style>
 
     <style name="Divider">
